@@ -159,8 +159,10 @@ int main() {
         choiceNum = 10;
     }
 
-    ShellSorting(dataInfo, choiceNum);
-    //heapSort(n,  dataInfo,  choiceNum);
+    auto shellCopy = dataInfo;
+    auto heapCopy = dataInfo;
+    ShellSorting(shellCopy, choiceNum);
+    heapSort(heapCopy,  choiceNum);
     if(choiceNum == 9) {
         if (userSorting == "Ascending") {
             for (int i = 1; i < stoi(userRange); i++) {

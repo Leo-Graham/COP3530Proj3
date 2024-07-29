@@ -96,7 +96,7 @@ void heapSort(vector<tupInfo> &dataInfo, int choice)
 //    bofa.push_back(song2);
 //    bofa.push_back(song3);
 //
-//    heapSort(3,bofa, 8);
+//    heapSort(bofa, 8);
 //
 //    for (int i = 0; i < 3;i++){
 //        cout << get<0>(bofa[i]) << endl;
