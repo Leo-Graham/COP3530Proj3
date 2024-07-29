@@ -114,8 +114,8 @@ void fileRead(vector<tupInfo> &data){
             getline(inStream, release_date); // get<23>
 
             tupInfo tup = make_tuple(id, name, album, album_id, artists, artist_ids, track_number, disc_number, explit, danceability,
-                       energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo, duration_ms,
-                       time_signature, year, release_date);
+                                     energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo, duration_ms,
+                                     time_signature, year, release_date);
 
             if(get<1>(tup) == "" && get<2>(tup) == ""){
                 break;
@@ -160,6 +160,7 @@ int main() {
     }
 
     ShellSorting(dataInfo, choiceNum);
+    //heapSort(n,  dataInfo,  choiceNum);
     if(choiceNum == 9) {
         if (userSorting == "Ascending") {
             for (int i = 1; i < stoi(userRange); i++) {
@@ -188,3 +189,4 @@ int main() {
 
     return 0;
 }
+
