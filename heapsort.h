@@ -19,7 +19,7 @@ using tupInfo = tuple<string,string,string,string,string,string,string,string,st
         string,string,string,string,string,string,string,string,string,string,string,string>;
 
 // To heapify a subtree rooted with node i which is an index in arr[]. n is size of heap
-void heapify(int n, int i, vector<tupInfo> &dataInfo, int choice)
+void heapify(int i, vector<tupInfo> &dataInfo, int choice)
 {
     int largest = i; // Initialize largest as root Since we are using 0 based indexing
     int l = 2 * i + 1; // left = 2*i + 1
@@ -27,11 +27,11 @@ void heapify(int n, int i, vector<tupInfo> &dataInfo, int choice)
 
     if(choice == 1) {
             // If left child is larger than root
-            if (l < n && get<9>(dataInfo[l]) > get<9>(dataInfo[largest]))
+            if (l < dataInfo.size() && get<9>(dataInfo[l]) > get<9>(dataInfo[largest]))
                 largest = l;
 
             // If right child is larger than largest so far
-            if (r < n && get<9>(dataInfo[l]) > get<9>(dataInfo[largest]))
+            if (r < dataInfo.size() && get<9>(dataInfo[l]) > get<9>(dataInfo[largest]))
                 largest = r;
 
             // If largest is not root
@@ -39,18 +39,18 @@ void heapify(int n, int i, vector<tupInfo> &dataInfo, int choice)
                 swap(get<9>(dataInfo[l]), get<9>(dataInfo[largest]));
 
                 // Recursively heapify the affected subtree
-                heapify(n, largest, dataInfo, choice);
+                heapify(largest, dataInfo, choice);
             }
 
 
     }
     if(choice == 2) {
             // If left child is larger than root
-            if (l < n && get<10>(dataInfo[l]) > get<10>(dataInfo[largest]))
+            if (l < dataInfo.size() && get<10>(dataInfo[l]) > get<10>(dataInfo[largest]))
                 largest = l;
 
             // If right child is larger than largest so far
-            if (r < n && get<10>(dataInfo[l]) > get<10>(dataInfo[largest]))
+            if (r < dataInfo.size() && get<10>(dataInfo[l]) > get<10>(dataInfo[largest]))
                 largest = r;
 
             // If largest is not root
@@ -58,7 +58,7 @@ void heapify(int n, int i, vector<tupInfo> &dataInfo, int choice)
                 swap(get<10>(dataInfo[l]), get<10>(dataInfo[largest]));
 
                 // Recursively heapify the affected subtree
-                heapify(n, largest, dataInfo, choice);
+                heapify(largest, dataInfo, choice);
             }
 
     }
@@ -68,17 +68,17 @@ void heapify(int n, int i, vector<tupInfo> &dataInfo, int choice)
 }
 
 // main function to do heap sort
-void heapSort(int n, vector<tupInfo> &dataInfo, int choice)
+void heapSort(vector<tupInfo> &dataInfo, int choice)
 {
     // Build heap (rearrange array)
-    for (int i = n / 2 - 1; i >= 0; i--)
-        heapify(n, i, dataInfo, choice);
+    for (int i = dataInfo.size() / 2 - 1; i >= 0; i--)
+        heapify(i, dataInfo, choice);
     // One by one extract an element from heap
-    for (int i = n - 1; i >= 0; i--) {
+    for (int i = dataInfo.size() - 1; i >= 0; i--) {
         // Move current root to end
         swap(dataInfo[0], dataInfo[i]);
         // call max heapify on the reduced heap
-        heapify(i, 0, dataInfo, choice);
+        heapify(i, dataInfo, choice);
     }
 }
 

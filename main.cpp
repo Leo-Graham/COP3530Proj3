@@ -160,7 +160,6 @@ int main() {
     }
 
     ShellSorting(dataInfo, choiceNum);
-
     if(choiceNum == 9) {
         if (userSorting == "Ascending") {
             for (int i = 1; i < stoi(userRange); i++) {
