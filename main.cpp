@@ -4,7 +4,8 @@
 #include <chrono>
 #include <fstream>
 #include <sstream>
-#include "ShellSort.h"
+#include "shellsort.h"
+#include "heapsort.h"
 using namespace std;
 using namespace chrono;
 
@@ -159,6 +160,7 @@ int main() {
     }
 
     ShellSorting(dataInfo, choiceNum);
+
     if(choiceNum == 9) {
         if (userSorting == "Ascending") {
             for (int i = 1; i < stoi(userRange); i++) {
