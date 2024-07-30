@@ -20,7 +20,10 @@ tuple<string,string,string> menuStartUp(){
     cout << "Pick what description you'd like to sort by (Type Number)" << endl;
     cout << "   1) Danceability" << endl;
     cout << "   2) Energy" << endl;
-    cout << "   3) Etc." << endl;
+    cout << "   3) Speechiness" << endl;
+    cout << "   4) Acousticness" << endl;
+    cout << "   5) Instrumentalness" << endl;
+    cout << "   6) Liveness" << endl;
 
     cin >> option;
 
@@ -48,8 +51,17 @@ tuple<string,string,string> menuStartUp(){
     else if(option == "2"){
         option = "Energy";
     }
-    else if(option == "3"){
-        option = "Etc.";
+    if(option == "3"){
+        option = "Speechiness";
+    }
+    else if(option == "4"){
+        option = "Acousticness";
+    }
+    else if(option == "5"){
+        option = "Instrumentalness";
+    }
+    else if(option == "6"){
+        option = "Liveness";
     }
 
     if(range == "1"){
@@ -93,8 +105,20 @@ void fileRead(vector<tupInfo> &data){
             }
             getline(inStream, key, ','); // get<11>
             getline(inStream, loudness, ','); // get<12>
+            find = loudness.find("E");
+            if(find != string::npos){
+                loudness = "0";
+            }
+            find = loudness.find("-");
+            if(find != string::npos){
+                loudness = loudness.substr(1);
+            }
             getline(inStream, mode, ','); // get<13>
             getline(inStream, speechiness, ','); // get<14>
+            find = speechiness.find("E");
+            if(find != string::npos){
+                speechiness = "0";
+            }
             getline(inStream, acousticness, ','); // get<15>
             find = acousticness.find("E");
             if(find != string::npos){
@@ -106,6 +130,10 @@ void fileRead(vector<tupInfo> &data){
                 instrumentalness = "0";
             }
             getline(inStream, liveness, ','); // get<17>
+            find = liveness.find("E");
+            if(find != string::npos){
+                liveness = "0";
+            }
             getline(inStream, valence, ','); // get<18>
             getline(inStream, tempo, ','); // get<19>
             getline(inStream, duration_ms, ','); // get<20>
@@ -149,6 +177,14 @@ int main() {
         choiceNum = 9;
     }else if(userInput == "Energy"){
         choiceNum = 10;
+    }else if(userInput == "Speechiness"){
+        choiceNum = 14;
+    }else if(userInput == "Acousticness"){
+        choiceNum = 15;
+    }else if(userInput == "Instrumentalness"){
+        choiceNum = 16;
+    }else if(userInput == "Liveness"){
+        choiceNum = 17;
     }
 
     auto shellCopy = dataInfo;
@@ -175,7 +211,7 @@ int main() {
             }
         } else if (userSorting == "Descending") {
             int counter = 1;
-            for (int i = shellCopy.size()-4; i > shellCopy.size() - (stoi(userRange) + 4); i--) {
+            for (int i = shellCopy.size()-2; i > shellCopy.size() - (stoi(userRange) + 2); i--) {
                 cout << counter << ". " << get<1>(shellCopy[i]) << " by: " << get<4>(shellCopy[i]) << " with a score of: " << get<9>(shellCopy[i]) << endl;
                 counter += 1;
             }
@@ -193,6 +229,58 @@ int main() {
                 counter += 1;
             }
         }
+    }else if(choiceNum == 14){
+        // Speechiness
+        if (userSorting == "Ascending") {
+            for (int i = 1; i < stoi(userRange)+1; i++) {
+                cout << i << ". " << get<1>(shellCopy[i]) << " by: " << get<4>(shellCopy[i]) << " with a score of: " << get<14>(shellCopy[i]) << endl;
+            }
+        } else if (userSorting == "Descending") {
+            int counter = 1;
+            for (int i = shellCopy.size()-2; i > shellCopy.size() - (stoi(userRange)+2); i--) {
+                cout << counter << ". " << get<1>(shellCopy[i]) << " by: " << get<4>(shellCopy[i]) << " with a score of: " << get<14>(shellCopy[i]) << endl;
+                counter += 1;
+            }
+        }
+    }else if(choiceNum == 15){
+        // Acousticness
+        if (userSorting == "Ascending") {
+            for (int i = 1; i < stoi(userRange)+1; i++) {
+                cout << i << ". " << get<1>(shellCopy[i]) << " by: " << get<4>(shellCopy[i]) << " with a score of: " << get<15>(shellCopy[i]) << endl;
+            }
+        } else if (userSorting == "Descending") {
+            int counter = 1;
+            for (int i = shellCopy.size()-2; i > shellCopy.size() - (stoi(userRange) + 2); i--) {
+                cout << counter << ". " << get<1>(shellCopy[i]) << " by: " << get<4>(shellCopy[i]) << " with a score of: " << get<15>(shellCopy[i]) << endl;
+                counter += 1;
+            }
+        }
+    }else if(choiceNum == 16){
+        // Instrumentalness
+        if (userSorting == "Ascending") {
+            for (int i = 1; i < stoi(userRange)+1; i++) {
+                cout << i << ". " << get<1>(shellCopy[i]) << " by: " << get<4>(shellCopy[i]) << " with a score of: " << get<16>(shellCopy[i]) << endl;
+            }
+        } else if (userSorting == "Descending") {
+            int counter = 1;
+            for (int i = shellCopy.size()-2; i > shellCopy.size() - (stoi(userRange)+2); i--) {
+                cout << counter << ". " << get<1>(shellCopy[i]) << " by: " << get<4>(shellCopy[i]) << " with a score of: " << get<16>(shellCopy[i]) << endl;
+                counter += 1;
+            }
+        }
+    }else if(choiceNum == 17){
+        // Liveness
+        if (userSorting == "Ascending") {
+            for (int i = 1; i < stoi(userRange)+1; i++) {
+                cout << i << ". " << get<1>(shellCopy[i]) << " by: " << get<4>(shellCopy[i]) << " with a score of: " << get<17>(shellCopy[i]) << endl;
+            }
+        } else if (userSorting == "Descending") {
+            int counter = 1;
+            for (int i = shellCopy.size()-2; i > shellCopy.size() - (stoi(userRange)+2); i--) {
+                cout << counter << ". " << get<1>(shellCopy[i]) << " by: " << get<4>(shellCopy[i]) << " with a score of: " << get<17>(shellCopy[i]) << endl;
+                counter += 1;
+            }
+        }
     }
 
     cout << "****************************************" << endl;
@@ -206,7 +294,7 @@ int main() {
             }
         } else if (userSorting == "Descending") {
             int counter = 1;
-            for (int i = heapCopy.size()-4; i > heapCopy.size() - (stoi(userRange) + 4); i--) {
+            for (int i = heapCopy.size()-2; i > heapCopy.size() - (stoi(userRange) + 2); i--) {
                 cout << counter << ". " << get<1>(heapCopy[i]) << " by: " << get<4>(heapCopy[i]) << " with a score of: " << get<9>(heapCopy[i]) << endl;
                 counter += 1;
             }
@@ -221,6 +309,58 @@ int main() {
             int counter = 1;
             for (int i = heapCopy.size()-2; i > heapCopy.size() - (stoi(userRange) + 2); i--) {
                 cout << counter << ". " << get<1>(heapCopy[i]) << " by: " << get<4>(heapCopy[i]) << " with a score of: " << get<10>(heapCopy[i]) << endl;
+                counter += 1;
+            }
+        }
+    }else if(choiceNum == 14){
+        // Speechiness
+        if (userSorting == "Ascending") {
+            for (int i = 1; i < stoi(userRange)+1; i++) {
+                cout << i << ". " << get<1>(heapCopy[i]) << " by: " << get<4>(heapCopy[i]) << " with a score of: " << get<14>(heapCopy[i]) << endl;
+            }
+        } else if (userSorting == "Descending") {
+            int counter = 1;
+            for (int i = heapCopy.size()-2; i > heapCopy.size() - (stoi(userRange) + 2); i--) {
+                cout << counter << ". " << get<1>(heapCopy[i]) << " by: " << get<4>(heapCopy[i]) << " with a score of: " << get<14>(heapCopy[i]) << endl;
+                counter += 1;
+            }
+        }
+    }else if(choiceNum == 15){
+        // Acousticness
+        if (userSorting == "Ascending") {
+            for (int i = 1; i < stoi(userRange)+1; i++) {
+                cout << i << ". " << get<1>(heapCopy[i]) << " by: " << get<4>(heapCopy[i]) << " with a score of: " << get<15>(heapCopy[i]) << endl;
+            }
+        } else if (userSorting == "Descending") {
+            int counter = 1;
+            for (int i = heapCopy.size()-2; i > heapCopy.size() - (stoi(userRange) + 2); i--) {
+                cout << counter << ". " << get<1>(heapCopy[i]) << " by: " << get<4>(heapCopy[i]) << " with a score of: " << get<15>(heapCopy[i]) << endl;
+                counter += 1;
+            }
+        }
+    }else if(choiceNum == 16){
+        // Instrumentalness
+        if (userSorting == "Ascending") {
+            for (int i = 1; i < stoi(userRange)+1; i++) {
+                cout << i << ". " << get<1>(heapCopy[i]) << " by: " << get<4>(heapCopy[i]) << " with a score of: " << get<16>(heapCopy[i]) << endl;
+            }
+        } else if (userSorting == "Descending") {
+            int counter = 1;
+            for (int i = heapCopy.size()-2; i > heapCopy.size() - (stoi(userRange) + 2); i--) {
+                cout << counter << ". " << get<1>(heapCopy[i]) << " by: " << get<4>(heapCopy[i]) << " with a score of: " << get<16>(heapCopy[i]) << endl;
+                counter += 1;
+            }
+        }
+    }else if(choiceNum == 17){
+        // Liveness
+        if (userSorting == "Ascending") {
+            for (int i = 1; i < stoi(userRange)+1; i++) {
+                cout << i << ". " << get<1>(heapCopy[i]) << " by: " << get<4>(heapCopy[i]) << " with a score of: " << get<17>(heapCopy[i]) << endl;
+            }
+        } else if (userSorting == "Descending") {
+            int counter = 1;
+            for (int i = heapCopy.size()-2; i > heapCopy.size() - (stoi(userRange) + 2); i--) {
+                cout << counter << ". " << get<1>(heapCopy[i]) << " by: " << get<4>(heapCopy[i]) << " with a score of: " << get<17>(heapCopy[i]) << endl;
                 counter += 1;
             }
         }
