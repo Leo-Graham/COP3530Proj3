@@ -18,6 +18,8 @@ using namespace std;
 using tupInfo = tuple<string,string,string,string,string,string,string,string,string,string,string,string,
         string,string,string,string,string,string,string,string,string,string,string,string>;
 
+// Based on geeks-for-geeks notes
+
 // To heapify a subtree rooted with node i which is an index in arr[]. n is size of heap
 void heapify(int i, vector<tupInfo> &dataInfo, int choice, int sizeHeap)
 {
@@ -43,14 +45,81 @@ void heapify(int i, vector<tupInfo> &dataInfo, int choice, int sizeHeap)
             heapify(largest, dataInfo, choice, sizeHeap);
         }
 
-    }
-    else if(choice == 10) {
+    }else if(choice == 10) {
         // If left child is larger than root
         if (l < sizeHeap && get<10>(dataInfo[l]) > get<10>(dataInfo[largest]))
             largest = l;
 
         // If right child is larger than largest so far
         if (r < sizeHeap && get<10>(dataInfo[r]) > get<10>(dataInfo[largest]))
+            largest = r;
+
+        // If largest is not root
+        if (largest != i) {
+            swap(dataInfo[i], dataInfo[largest]);
+
+            // Recursively heapify the affected subtree
+            heapify(largest, dataInfo, choice, sizeHeap);
+        }
+
+    }else if(choice == 14) {
+        // If left child is larger than root
+        if (l < sizeHeap && get<14>(dataInfo[l]) > get<14>(dataInfo[largest]))
+            largest = l;
+
+        // If right child is larger than largest so far
+        if (r < sizeHeap && get<14>(dataInfo[r]) > get<14>(dataInfo[largest]))
+            largest = r;
+
+        // If largest is not root
+        if (largest != i) {
+            swap(dataInfo[i], dataInfo[largest]);
+
+            // Recursively heapify the affected subtree
+            heapify(largest, dataInfo, choice, sizeHeap);
+        }
+
+    }else if(choice == 15) {
+        // If left child is larger than root
+        if (l < sizeHeap && get<15>(dataInfo[l]) > get<15>(dataInfo[largest]))
+            largest = l;
+
+        // If right child is larger than largest so far
+        if (r < sizeHeap && get<15>(dataInfo[r]) > get<15>(dataInfo[largest]))
+            largest = r;
+
+        // If largest is not root
+        if (largest != i) {
+            swap(dataInfo[i], dataInfo[largest]);
+
+            // Recursively heapify the affected subtree
+            heapify(largest, dataInfo, choice, sizeHeap);
+        }
+
+    }else if(choice == 16) {
+        // If left child is larger than root
+        if (l < sizeHeap && get<16>(dataInfo[l]) > get<16>(dataInfo[largest]))
+            largest = l;
+
+        // If right child is larger than largest so far
+        if (r < sizeHeap && get<16>(dataInfo[r]) > get<16>(dataInfo[largest]))
+            largest = r;
+
+        // If largest is not root
+        if (largest != i) {
+            swap(dataInfo[i], dataInfo[largest]);
+
+            // Recursively heapify the affected subtree
+            heapify(largest, dataInfo, choice, sizeHeap);
+        }
+
+    }else if(choice == 17) {
+        // If left child is larger than root
+        if (l < sizeHeap && get<17>(dataInfo[l]) > get<17>(dataInfo[largest]))
+            largest = l;
+
+        // If right child is larger than largest so far
+        if (r < sizeHeap && get<17>(dataInfo[r]) > get<17>(dataInfo[largest]))
             largest = r;
 
         // If largest is not root
