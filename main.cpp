@@ -130,14 +130,6 @@ void fileRead(vector<tupInfo> &data){
 }
 
 int main() {
-    /* Time Finding Code
-    auto start = system_clock::now();
-     // put code to run timer with here
-    auto end = system_clock::now();
-    auto elapsed = duration_cast<seconds>(end - start);
-    cout << elapsed.count() << endl;
-    */
-
     // vector that has a tuple containing every single data variable for each data point in our set.
     vector<tupInfo> dataInfo;
     // this reads the file and updates our vector to now hold all 300k+ data points
@@ -161,29 +153,74 @@ int main() {
 
     auto shellCopy = dataInfo;
     auto heapCopy = dataInfo;
+
+    auto shellStart = system_clock::now();
+    // put code to run timer with here
     ShellSorting(shellCopy, choiceNum);
+    auto shellEnd = system_clock::now();
+    auto shellElapsed = duration_cast<seconds>(shellEnd - shellStart);
+
+    auto heapStart = system_clock::now();
+    // put code to run timer with here
     heapSort(heapCopy,  choiceNum);
+    auto heapEnd = system_clock::now();
+    auto heapElapsed = duration_cast<seconds>(heapEnd - heapStart);
+
+    cout << "Shell Sort Time Taken: " << shellElapsed.count() << " seconds." << endl;
     if(choiceNum == 9) {
+        // Danceability
         if (userSorting == "Ascending") {
-            for (int i = 1; i < stoi(userRange); i++) {
-                cout << i << ". " << get<1>(dataInfo[i]) << " " << get<9>(dataInfo[i]) << endl;
+            for (int i = 1; i < stoi(userRange)+1; i++) {
+                cout << i << ". " << get<1>(shellCopy[i]) << " by: " << get<4>(shellCopy[i]) << " with a score of: " << get<9>(shellCopy[i]) << endl;
             }
         } else if (userSorting == "Descending") {
             int counter = 1;
-            for (int i = dataInfo.size() - 5; i > dataInfo.size() - (stoi(userRange) + 5); i--) {
-                cout << counter << ". " << get<1>(dataInfo[i]) << " " << get<9>(dataInfo[i]) << endl;
+            for (int i = shellCopy.size()-4; i > shellCopy.size() - (stoi(userRange) + 4); i--) {
+                cout << counter << ". " << get<1>(shellCopy[i]) << " by: " << get<4>(shellCopy[i]) << " with a score of: " << get<9>(shellCopy[i]) << endl;
                 counter += 1;
             }
         }
     }else if(choiceNum == 10){
+        // Energy
         if (userSorting == "Ascending") {
-            for (int i = 1; i < stoi(userRange); i++) {
-                cout << i << ". " << get<1>(dataInfo[i]) << " " << get<10>(dataInfo[i]) << endl;
+            for (int i = 1; i < stoi(userRange)+1; i++) {
+                cout << i << ". " << get<1>(shellCopy[i]) << " by: " << get<4>(shellCopy[i]) << " with a score of: " << get<10>(shellCopy[i]) << endl;
             }
         } else if (userSorting == "Descending") {
             int counter = 1;
-            for (int i = dataInfo.size() - 5; i > dataInfo.size() - (stoi(userRange) + 5); i--) {
-                cout << counter << ". " << get<1>(dataInfo[i]) << " " << get<10>(dataInfo[i]) << endl;
+            for (int i = shellCopy.size()-2; i > shellCopy.size() - (stoi(userRange) + 2); i--) {
+                cout << counter << ". " << get<1>(shellCopy[i]) << " by: " << get<4>(shellCopy[i]) << " with a score of: " << get<10>(shellCopy[i]) << endl;
+                counter += 1;
+            }
+        }
+    }
+
+    cout << "****************************************" << endl;
+
+    cout << "Heap Sort Time Taken: " << heapElapsed.count() << " seconds." << endl;
+    if(choiceNum == 9) {
+        // Danceability
+        if (userSorting == "Ascending") {
+            for (int i = 1; i < stoi(userRange)+1; i++) {
+                cout << i << ". " << get<1>(heapCopy[i]) << " by: " << get<4>(heapCopy[i]) << " with a score of: " << get<9>(heapCopy[i]) << endl;
+            }
+        } else if (userSorting == "Descending") {
+            int counter = 1;
+            for (int i = heapCopy.size()-4; i > heapCopy.size() - (stoi(userRange) + 4); i--) {
+                cout << counter << ". " << get<1>(heapCopy[i]) << " by: " << get<4>(heapCopy[i]) << " with a score of: " << get<9>(heapCopy[i]) << endl;
+                counter += 1;
+            }
+        }
+    }else if(choiceNum == 10){
+        // Energy
+        if (userSorting == "Ascending") {
+            for (int i = 1; i < stoi(userRange)+1; i++) {
+                cout << i << ". " << get<1>(heapCopy[i]) << " by: " << get<4>(heapCopy[i]) << " with a score of: " << get<10>(heapCopy[i]) << endl;
+            }
+        } else if (userSorting == "Descending") {
+            int counter = 1;
+            for (int i = heapCopy.size()-2; i > heapCopy.size() - (stoi(userRange) + 2); i--) {
+                cout << counter << ". " << get<1>(heapCopy[i]) << " by: " << get<4>(heapCopy[i]) << " with a score of: " << get<10>(heapCopy[i]) << endl;
                 counter += 1;
             }
         }
@@ -191,4 +228,3 @@ int main() {
 
     return 0;
 }
-
