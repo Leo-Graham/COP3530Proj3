@@ -4,6 +4,7 @@
 #include <chrono>
 #include <fstream>
 #include <sstream>
+#include <regex>
 #include "shellsort.h"
 #include "heapsort.h"
 using namespace std;
@@ -13,6 +14,8 @@ tuple<string,string,string> menuStartUp(){
     string option;
     string range;
     string songRange;
+    regex inputOptionValidation = regex(R"(^[1-6]$)");
+    regex inputRangeValidation = regex(R"(^[1-2]$)");
 
     cout << "Welcome to our silly little program!" << endl;
     cout << endl;
@@ -27,11 +30,23 @@ tuple<string,string,string> menuStartUp(){
 
     cin >> option;
 
+    bool optionValidation = regex_match(option, inputOptionValidation);
+    if(!optionValidation){
+        cout<< "Invalid input, terminating"<< endl<<endl;
+        exit(0);
+    }
+
     cout << "What order would you like it in? (Type Number)" << endl;
     cout << "   1) Ascending" << endl;
     cout << "   2) Descending" << endl;
 
     cin >> range;
+
+    bool rangeValidation = regex_match(range, inputRangeValidation);
+    if(!rangeValidation){
+        cout<< "Invalid input, terminating."<< endl<<endl;
+        exit(0);
+    }
 
     cout << "How many songs would you like to be shown after sorting? (Type Number (1-352000))" << endl;
 
